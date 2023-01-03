@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarbershopCalendar.API", "BarbershopCalendar.API\BarbershopCalendar.API.csproj", "{73270D9D-CB69-4323-88E9-84589F9B514B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarbershopCalendar.Application", "BarbershopCalendarI.Application\BarbershopCalendar.Application.csproj", "{2DBDCF82-21A2-4476-8C5C-C1DBAC006C3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarbershopCalendar.Persistence", "BarbershopCalendar.Persistence\BarbershopCalendar.Persistence.csproj", "{48663DE2-E28A-4958-B712-E16A6D921F69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarbershopCalendar.Domain", "BarbershopCalendar.Domain\BarbershopCalendar.Domain.csproj", "{4746ECAF-49FC-4697-BA01-783ABBB48A39}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73270D9D-CB69-4323-88E9-84589F9B514B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73270D9D-CB69-4323-88E9-84589F9B514B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73270D9D-CB69-4323-88E9-84589F9B514B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73270D9D-CB69-4323-88E9-84589F9B514B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBDCF82-21A2-4476-8C5C-C1DBAC006C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBDCF82-21A2-4476-8C5C-C1DBAC006C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBDCF82-21A2-4476-8C5C-C1DBAC006C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBDCF82-21A2-4476-8C5C-C1DBAC006C3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48663DE2-E28A-4958-B712-E16A6D921F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48663DE2-E28A-4958-B712-E16A6D921F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48663DE2-E28A-4958-B712-E16A6D921F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48663DE2-E28A-4958-B712-E16A6D921F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4746ECAF-49FC-4697-BA01-783ABBB48A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4746ECAF-49FC-4697-BA01-783ABBB48A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4746ECAF-49FC-4697-BA01-783ABBB48A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4746ECAF-49FC-4697-BA01-783ABBB48A39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

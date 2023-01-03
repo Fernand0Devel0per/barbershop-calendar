@@ -1,7 +1,9 @@
+using BarbershopCalendar.Persistence.DataContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,12 @@ namespace BarberShopCalendar.API
         {
 
             services.AddControllers();
+            services.AddDbContext<BarbershopContext>(options => 
+                options.UseNpgsql(Configuration.GetConnectionString("Default")));
+
+            services.AddCors(); 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BarberShopCalendar.API", Version = "v1" });
@@ -49,6 +57,10 @@ namespace BarberShopCalendar.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(acess => acess.AllowAnyHeader()
+                                  .AllowAnyMethod()
+                                  .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
