@@ -26,8 +26,17 @@ namespace BarbershopCalendar.Persistence.Interface
                 Include(dayApp => dayApp.Appointments);
 
             return await query.ToArrayAsync();
+        }
 
+        public async Task<DayAppointment> GetDayAppointmentIdAsync(int dayAppointmentId)
+        {
+            IQueryable<DayAppointment> query = (IQueryable<DayAppointment>)_barbershopContext.
+                DaysAppointment.
+                AsNoTracking().
+                Where(dayApp => dayApp.Id == dayAppointmentId).
+                Include(dayApp => dayApp.Appointments);
 
+            return await query.FirstOrDefaultAsync();
         }
     }
 }
