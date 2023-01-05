@@ -1,4 +1,5 @@
-﻿using BarbershopCalendar.Persistence.DataContext;
+﻿using BarbershopCalendar.Domain;
+using BarbershopCalendar.Persistence.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace BarbershopCalendar.Persistence.Interface
 {
-    public class DayAppointment : IDayAppointment
+    public class DayAppointmentPersist : IDayAppointmentPersist
     {
         private readonly BarbershopContext _barbershopContext;
 
-        public DayAppointment(BarbershopContext barbershopContext)
+        public DayAppointmentPersist(BarbershopContext barbershopContext)
         {
             _barbershopContext = barbershopContext;
         }
@@ -28,7 +29,7 @@ namespace BarbershopCalendar.Persistence.Interface
             return await query.ToArrayAsync();
         }
 
-        public async Task<DayAppointment> GetDayAppointmentIdAsync(int dayAppointmentId)
+        public async Task<DayAppointment> GetDayAppointmentByIdAsync(int dayAppointmentId)
         {
             IQueryable<DayAppointment> query = (IQueryable<DayAppointment>)_barbershopContext.
                 DaysAppointment.

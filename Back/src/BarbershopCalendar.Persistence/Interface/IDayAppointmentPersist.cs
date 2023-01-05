@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace BarbershopCalendar.Persistence.Interface
 {
-    public interface IDayAppointment
+    public interface IDayAppointmentPersist
     {
         Task<DayAppointment[]> GetAllDayAppointmentsAsync();
 
-        Task<DayAppointment> GetDayAppointmentIdAsync(int dayAppointmentId)
+        Task<DayAppointment> GetDayAppointmentByIdAsync(int dayAppointmentId);
     }
 }
