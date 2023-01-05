@@ -16,7 +16,7 @@ namespace BarbershopCalendar.Domain
 
         public bool IsAvailable { get; set; }
 
-        public IEnumerable<Appointment> Appointments { get; set; }
+        public IEnumerable<Appointment>? Appointments { get; set; }
 
     }
 

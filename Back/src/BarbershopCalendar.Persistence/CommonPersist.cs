@@ -36,6 +36,7 @@ namespace BarbershopCalendar.Persistence
         {
             _barbershopContext.RemoveRange(entityArray);
         }
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _barbershopContext.SaveChangesAsync()) > 0;

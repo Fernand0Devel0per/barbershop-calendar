@@ -12,14 +12,22 @@ namespace BarbershopCalendar.Domain
 
         public DateTime? TimeAppointment { get; set; }
 
-        public TypeOfWork? Service { get; set; }
-
-        public Status Status { get; set; }
-
         public string ClientName { get; set; }
 
         public string PhoneNumber { get; set; }
 
         public string Email { get; set; }
+
+        public TypeOfWork? TypeOfWork { get; set; }
+
+        public int TypeOfWorkId { get; set; }
+
+        public Status Status { get; set; }
+
+        public int StatusId { get; set; }
+
+        public DayAppointment DayAppointment { get; set; }
+
+        public int DayAppointmentId { get; set; }
     }
 }
