@@ -1,4 +1,5 @@
-﻿using BarbershopCalendar.Domain;
+﻿using BarbershopCalendar.Application.Dtos.Appointment;
+using BarbershopCalendar.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

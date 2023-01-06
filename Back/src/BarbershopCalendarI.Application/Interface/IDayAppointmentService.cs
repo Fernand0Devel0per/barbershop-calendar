@@ -15,7 +15,7 @@ namespace BarbershopCalendar.Application.Interface
 
         Task<bool> DeleteDayAppointmentDto(int dayAppointmentId);
 
-        Task<DayAppointmentOnlyDayDto[]> GetDayAppointmentDtoByPageAsync(int page = 1, int row = 5);
+        Task<DayAppointmentOnlyDayDto[]> GetDayAppointmentDtoByPageAsync(int page, int row);
 
         Task<DayAppointmentDto> GetDayAppointmentDtoByIdAsync(int dayAppointmentId);
     }

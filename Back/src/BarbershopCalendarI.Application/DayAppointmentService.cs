@@ -30,89 +30,79 @@ namespace BarbershopCalendar.Application
         public async Task<DayAppointmentDto> AddDayAppointmentDto(DayAppointmentDto model)
         {
 
-            try
+            var result = _mapper.Map<DayAppointment>(model);
+            _commonPersist.Add<DayAppointment>(result);
+            if (await _commonPersist.SaveChangesAsync())
             {
-                var result = _mapper.Map<DayAppointment>(model);
-                _commonPersist.Add<DayAppointment>(result);
-                if (await _commonPersist.SaveChangesAsync())
-                {
-                    result = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(result.Id);
-                    return _mapper.Map<DayAppointmentDto>(result);
-                }
-                return null;
+                result = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(result.Id);
+                return _mapper.Map<DayAppointmentDto>(result);
             }
-            catch (Exception ex)
-            {
+            throw new Exception($"Ocorreu um erro ao tentar adiconar {model.Date.ToString("dd/MM/yyyy")} a agenda");
 
-                throw new Exception(ex.Message);
-            }
         }
 
         public async Task<DayAppointmentDto> UpdateDayAppointmentDto(int dayAppointmentId, DayAppointmentDto model)
         {
-            try
+
+            var dayAppointment = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
+            if (dayAppointment == null) throw new NullReferenceException("Não foi encontrado nenhum dia com este id");
+
+            _mapper.Map(model, dayAppointment);
+            model.Id = dayAppointment.Id;
+
+            _commonPersist.Updade(dayAppointment);
+            if (await _commonPersist.SaveChangesAsync())
             {
-                var dayAppointment = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
-                if (dayAppointment == null) return null;
-
-                _mapper.Map(model, dayAppointment);
-                model.Id = dayAppointment.Id;
-
-                _commonPersist.Updade(dayAppointment);
-                if (await _commonPersist.SaveChangesAsync())
-                {
-                    var result = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
-                    return _mapper.Map<DayAppointmentDto>(result);
-                }
-                return null;
-
+                var result = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
+                return _mapper.Map<DayAppointmentDto>(result);
             }
-            catch (Exception ex)
-            {
 
-                throw new Exception(ex.Message);
-            }
+            throw new
+                Exception($"Ocorreu um erro ao tentar atualizar o dia {dayAppointment.Date.ToString("dd/MM/yyyy")} agenda");
+
+
         }
 
         public async Task<bool> DeleteDayAppointmentDto(int dayAppointmentId)
         {
-            try
-            {
-                var dayAppointment = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
-                if (dayAppointment == null) throw new Exception("Data de agenda para remoção não encontrado");
 
-                dayAppointment.Id = dayAppointmentId;
+            var dayAppointment = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
+            if (dayAppointment == null) throw new Exception("Data de agenda para remoção não encontrado");
 
-                _commonPersist.Delete(dayAppointment);
-                return await _commonPersist.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
+            dayAppointment.Id = dayAppointmentId;
 
-                throw new Exception(ex.Message);
-            }
+            _commonPersist.Delete(dayAppointment);
+            return await _commonPersist.SaveChangesAsync();
         }
 
         public async Task<DayAppointmentDto> GetDayAppointmentDtoByIdAsync(int dayAppointmentId)
         {
 
-            try
-            {
-                var dayAppointment = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
-                var result = _mapper.Map<DayAppointmentDto>(dayAppointment);
-                return result;
-            }
-            catch (Exception ex)
-            {
+            var dayAppointment = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
+            if (dayAppointment == null) throw new NullReferenceException("Não foi encontrado nenhum dia com este id");
 
-                throw new Exception(ex.Message);
-            }
+            var result = _mapper.Map<DayAppointmentDto>(dayAppointment);
+
+            return result;
+
+
         }
 
-        public Task<DayAppointmentOnlyDayDto[]> GetDayAppointmentDtoByPageAsync(int page = 1, int row = 5)
+        public async Task<DayAppointmentOnlyDayDto[]> GetDayAppointmentDtoByPageAsync(int page, int row)
         {
-            throw new NotImplementedException();
-        }
 
+            if (row > 5) throw new ArgumentOutOfRangeException("O retorno maximo de resultado é igual a 5");
+
+            var dayAppointment = await _dayAppointmentPersist.GetAllDayAppointmentsAsync();
+            dayAppointment = dayAppointment.Where(dayApp => dayApp.Date >= DateTime.Today).ToArray();
+            dayAppointment = dayAppointment.Skip((page - 1) * row).Take(row).ToArray();
+
+            if (dayAppointment.Length == 0 || dayAppointment == null)
+                throw new IndexOutOfRangeException("Não existe mais resultados para serem enviados");
+
+            var result = _mapper.Map<DayAppointmentOnlyDayDto[]>(dayAppointment);
+            return result;
+
+        }
     }
 }
