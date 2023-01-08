@@ -27,8 +27,10 @@ namespace BarbershopCalendar.Application
             _mapper = mapper;
         }
 
-        public async Task<DayAppointmentDto> AddDayAppointmentDto(DayAppointmentDto model)
+        public async Task<DayAppointmentDto> AddDayAppointment(DayAppointmentDto model)
         {
+            var dayAppointments = _dayAppointmentPersist.GetDayAppointmentByDateAsync(model.Date.ToString("dd/MM/yyyy"));
+            if (dayAppointments != null) throw new InvalidDataException("Ja existe um cadastro deste dia na agenda");
 
             var result = _mapper.Map<DayAppointment>(model);
             _commonPersist.Add<DayAppointment>(result);
@@ -41,7 +43,7 @@ namespace BarbershopCalendar.Application
 
         }
 
-        public async Task<DayAppointmentDto> UpdateDayAppointmentDto(int dayAppointmentId, DayAppointmentDto model)
+        public async Task<DayAppointmentDto> UpdateDayAppointment(int dayAppointmentId, DayAppointmentDto model)
         {
 
             var dayAppointment = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
@@ -67,7 +69,7 @@ namespace BarbershopCalendar.Application
         {
 
             var dayAppointment = await _dayAppointmentPersist.GetDayAppointmentByIdAsync(dayAppointmentId);
-            if (dayAppointment == null) throw new Exception("Data de agenda para remoção não encontrado");
+            if (dayAppointment == null) throw new NullReferenceException("Data de agenda para remoção não encontrado");
 
             dayAppointment.Id = dayAppointmentId;
 

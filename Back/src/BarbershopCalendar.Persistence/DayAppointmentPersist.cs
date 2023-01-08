@@ -39,5 +39,16 @@ namespace BarbershopCalendar.Persistence.Interface
 
             return await query.FirstOrDefaultAsync();
         }
+
+        public async Task<DayAppointment> GetDayAppointmentByDateAsync(string date)
+        {
+            IQueryable<DayAppointment> query = (IQueryable<DayAppointment>)_barbershopContext.
+                DaysAppointment.
+                AsNoTracking().
+                Where(dayApp => dayApp.Date.ToString("dd/MM/yyyy") == date).
+                Include(dayApp => dayApp.Appointments);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

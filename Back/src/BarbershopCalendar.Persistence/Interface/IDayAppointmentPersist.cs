@@ -13,5 +13,7 @@ namespace BarbershopCalendar.Persistence.Interface
         Task<DayAppointment[]> GetAllDayAppointmentsAsync();
 
         Task<DayAppointment> GetDayAppointmentByIdAsync(int dayAppointmentId);
+
+        Task<DayAppointment> GetDayAppointmentByDateAsync(string date);
     }
 }

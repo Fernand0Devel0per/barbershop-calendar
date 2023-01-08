@@ -1,4 +1,8 @@
+using BarbershopCalendar.Application;
+using BarbershopCalendar.Application.Interface;
+using BarbershopCalendar.Persistence;
 using BarbershopCalendar.Persistence.DataContext;
+using BarbershopCalendar.Persistence.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +38,10 @@ namespace BarberShopCalendar.API
             services.AddDbContext<BarbershopContext>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("Default")));
 
+            services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings
+                    .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
             services.AddCors(); 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -40,6 +49,10 @@ namespace BarberShopCalendar.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BarberShopCalendar.API", Version = "v1" });
             });
+
+            services.AddScoped<IDayAppointmentService, DayAppointmentService>();
+            services.AddScoped<ICommonPersist, CommonPersist>();
+            services.AddScoped<IDayAppointmentPersist, DayAppointmentPersist>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

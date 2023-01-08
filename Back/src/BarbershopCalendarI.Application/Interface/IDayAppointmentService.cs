@@ -9,9 +9,9 @@ namespace BarbershopCalendar.Application.Interface
 {
     public interface IDayAppointmentService
     {
-        Task<DayAppointmentDto> AddDayAppointmentDto(DayAppointmentDto model);
+        Task<DayAppointmentDto> AddDayAppointment(DayAppointmentDto model);
 
-        Task<DayAppointmentDto> UpdateDayAppointmentDto(int dayAppointmentId, DayAppointmentDto model);
+        Task<DayAppointmentDto> UpdateDayAppointment(int dayAppointmentId, DayAppointmentDto model);
 
         Task<bool> DeleteDayAppointmentDto(int dayAppointmentId);
 
