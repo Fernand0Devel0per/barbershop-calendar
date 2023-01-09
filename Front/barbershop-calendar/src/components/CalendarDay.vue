@@ -72,7 +72,8 @@ export default defineComponent({
     methods:{
         hasAppointment(isOpen: boolean): string {
             return (isOpen) ? 'Disponivel' : 'Indiponivel'
-        }
+        },
+        
     }
 })
 </script>
