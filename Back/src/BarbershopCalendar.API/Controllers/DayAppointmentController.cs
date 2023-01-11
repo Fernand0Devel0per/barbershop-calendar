@@ -1,5 +1,6 @@
 ﻿using BarbershopCalendar.Application;
 using BarbershopCalendar.Application.Dtos.DayAppointment;
+using BarbershopCalendar.Application.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,22 +14,22 @@ namespace BarbershopCalendar.API.Controllers
     [Route("api/[controller]")]
     public class DayAppointmentController : ControllerBase
     {
-        private readonly DayAppointmentService _dayAppointmentService;
+        private readonly IDayAppointmentService _dayAppointmentService;
 
-        public DayAppointmentController(DayAppointmentService dayAppointmentService)
+        public DayAppointmentController(IDayAppointmentService dayAppointmentService)
         {
             _dayAppointmentService = dayAppointmentService;
         }
 
         [HttpGet,
          Route("/listDays")]
-        public async Task<IActionResult> Get([FromQuery] int page = 1, [FromQuery] int row = 5)
+        public async Task<IActionResult> Get([FromQuery] int? page = 1, [FromQuery] int? row = 5)
         {
 
             try
             {
                 DayAppointmentOnlyDayDto[] listResult = await _dayAppointmentService.
-                    GetDayAppointmentDtoByPageAsync(page, row);
+                    GetDayAppointmentDtoByPageAsync(page.Value, row.Value) ;
                 return Ok(listResult);
             }
             catch (IndexOutOfRangeException ex)

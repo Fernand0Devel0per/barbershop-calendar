@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BarbershopCalendar.Persistence.Migrations
 {
     [DbContext(typeof(BarbershopContext))]
-    [Migration("20230105152944_Initial")]
-    partial class Initial
+    [Migration("20230111004750_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

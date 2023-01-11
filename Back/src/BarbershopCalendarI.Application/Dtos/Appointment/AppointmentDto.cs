@@ -16,22 +16,22 @@ namespace BarbershopCalendar.Application.Dtos.Appointment
 
         public DateTime? TimeAppointment { get; set; }
 
-        public string ClientName { get; set; }
+        public string? ClientName { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public TypeOfWorkDto? TypeOfWork { get; set; }
 
-        public int TypeOfWorkId { get; set; }
+        public int? TypeOfWorkId { get; set; }
 
-        public StatusDto Status { get; set; }
+        public StatusDto? Status { get; set; }
 
         public int StatusId { get; set; }
 
-        public DayAppointmentDto DayAppointment { get; set; }
+        public DayAppointmentDto? DayAppointment { get; set; }
 
-        public int DayAppointmentId { get; set; }
+        public int? DayAppointmentId { get; set; }
     }
 }

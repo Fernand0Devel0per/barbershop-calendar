@@ -3,6 +3,7 @@ using System;
 using BarbershopCalendar.Persistence.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BarbershopCalendar.Persistence.Migrations
 {
     [DbContext(typeof(BarbershopContext))]
-    partial class BarbershopContextModelSnapshot : ModelSnapshot
+    [Migration("20230111011325_two")]
+    partial class two
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

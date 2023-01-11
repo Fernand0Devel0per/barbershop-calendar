@@ -29,7 +29,7 @@ namespace BarbershopCalendar.Application
 
         public async Task<DayAppointmentDto> AddDayAppointment(DayAppointmentDto model)
         {
-            var dayAppointments = _dayAppointmentPersist.GetDayAppointmentByDateAsync(model.Date.ToString("dd/MM/yyyy"));
+            DayAppointment dayAppointments = await _dayAppointmentPersist.GetDayAppointmentByDateAsync(model.Date.ToString("dd/MM/yyyy"));
             if (dayAppointments != null) throw new InvalidDataException("Ja existe um cadastro deste dia na agenda");
 
             var result = _mapper.Map<DayAppointment>(model);

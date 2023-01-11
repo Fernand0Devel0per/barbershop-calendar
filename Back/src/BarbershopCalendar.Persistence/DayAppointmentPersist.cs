@@ -42,13 +42,17 @@ namespace BarbershopCalendar.Persistence.Interface
 
         public async Task<DayAppointment> GetDayAppointmentByDateAsync(string date)
         {
+            string[] dates = date.Split('/');
             IQueryable<DayAppointment> query = (IQueryable<DayAppointment>)_barbershopContext.
                 DaysAppointment.
                 AsNoTracking().
-                Where(dayApp => dayApp.Date.ToString("dd/MM/yyyy") == date).
+                Where(dayApp => dayApp.Date.Day.ToString() == dates[0] &&
+                                dayApp.Date.Month.ToString() == dates[1] &&
+                                dayApp.Date.Year.ToString() == dates[2]).
                 Include(dayApp => dayApp.Appointments);
 
-            return await query.FirstOrDefaultAsync();
+            var result = await query.FirstOrDefaultAsync();
+            return result;
         }
     }
 }

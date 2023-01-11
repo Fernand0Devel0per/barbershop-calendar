@@ -42,8 +42,8 @@ namespace BarberShopCalendar.API
                 .AddNewtonsoftJson(x => x.SerializerSettings
                     .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
-            services.AddCors(); 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddCors(); 
 
             services.AddSwaggerGen(c =>
             {
