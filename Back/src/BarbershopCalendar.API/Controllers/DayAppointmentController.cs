@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BarbershopCalendar.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class DayAppointmentController : ControllerBase
     {
         private readonly IDayAppointmentService _dayAppointmentService;

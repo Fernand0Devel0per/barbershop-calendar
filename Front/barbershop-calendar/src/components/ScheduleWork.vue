@@ -3,7 +3,8 @@
     <div class="column 
                 is-flex 
                 is-justify-content-center 
-                is-align-items-center" style="background-image: linear-gradient(165deg,#0088e0, #fbf3ef, #fbf3ef, #e24c3b ); width: 100%; height: 20vh;">
+                is-align-items-center
+                calendar-box" >
       <CalendarDay></CalendarDay>
     </div>
     <div class="column" style="background-color: red; width: 100%; height: 80vh;">
@@ -23,4 +24,10 @@ export default defineComponent({
 })
 </script>
 <style >
+
+.calendar-box{
+  width: 100%;
+  height: 20vh;
+  background-image: var(--main-bg-color);
+}
 </style>

@@ -13,7 +13,7 @@ namespace BarbershopCalendar.Application.Dtos.DayAppointment
 
         public string WeekDay { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public bool IsAvailable { get; set; }
     }

@@ -9,12 +9,12 @@
             <div class="right-left-padding" v-for="(day, index) in listIDayAppointment" :key="index">
                 <div class="card is-clickable">
                     <div class="card-header has-background-link ">
-                        <div class="card-header-title is-centered p-0 has-text-white">{{day.weekDay  }}</div>
+                        <div class="card-header-title is-centered p-0 has-text-white">{{day.weekDay}}</div>
                     </div>
                     <div class="card-content is-centered p-1">
-                        <span class="tag is-link">{{day.date}}</span>
+                        <span class="tag is-link">{{day.date.substring(0,10)}}</span>
                         <br />
-                        <span class="tag" :class="`${day.isAvailable ? 'is-success' : 'is-danger'}`">{{hasAppointment(day.is)}}</span>
+                        <span class="tag" :class="`${day.isAvailable ? 'is-success' : 'is-danger'}`">{{hasAppointment(day.isAvailable)}}</span>
                     </div>
                 </div>
             </div>
@@ -29,19 +29,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import IDayAppointment from '@/interfaces/IDayAppointment'
+import { useDayAppointmentStore } from '@/store';
 export default defineComponent({
     name: 'CalendarDay',
-    props:{
-
-    },
     data() {
         return {
-            listIDayAppointment: null as IDayAppointment[] | null,
+           // listIDayAppointment: null as IDayAppointment[] | null,
 
         }
     },
     mounted () {
-        this.listIDayAppointment = [
+        this.store.DayAppointment(1,5);
+        /*this.listIDayAppointment = [
             {
             weekDay: "Segunda",
             date : "02/01/2023",
@@ -68,12 +67,24 @@ export default defineComponent({
             isAvailable: false
             }
         ]
+        */
+    },
+    computed:{
+        listIDayAppointment(): IDayAppointment[]{
+            return this.store.DayAppointmentList
+        }
     },
     methods:{
         hasAppointment(isOpen: boolean): string {
             return (isOpen) ? 'Disponivel' : 'Indiponivel'
         },
         
+    },
+    setup() {
+        const store = useDayAppointmentStore()
+        return{
+            store
+        }
     }
 })
 </script>

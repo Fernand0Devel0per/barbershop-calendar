@@ -22,5 +22,7 @@ export default defineComponent({
 })
 </script>
 <style>
-
+:root {
+  --main-bg-color: linear-gradient(165deg,#0088e0, #fbf3ef, #fbf3ef, #e24c3b );
+}
 </style>
